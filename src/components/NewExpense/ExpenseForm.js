@@ -44,14 +44,6 @@ const ExpenseForm = (props) => {
     };
 
     props.onSaveExpenseData(expenseData);
-    props.onSubmitCheck(0);
-    setEnteredTitle("");
-    setEnteredAmount("");
-    setEnteredDate("");
-  };
-
-  //if button clicked -- show add new expense field
-  const onCancelHandler = () => {
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");
@@ -90,7 +82,7 @@ const ExpenseForm = (props) => {
             />
           </div>
         </div>
-        <button type="button" onClick={onCancelHandler}>
+        <button type="button" onClick={props.onCancel}>
           Cancel
         </button>
         <button type="submit">Add Expenses</button>

@@ -9,30 +9,29 @@ const NewExpense = (props) => {
       id: Math.random().toString(),
     };
     props.onAddExpense(expenseData);
+    setIsEditing(false);
   };
 
-  const [count, setCount] = useState(0);
-  const fieldEntryHandler = (value) => {
-    setCount((clickCount) => {
-      return clickCount + 1;
-    });
-    setCount(value);
+  const [isEditing, setIsEditing] = useState(false);
+  const startEditingHandler = () => {
+    setIsEditing(true);
   };
 
-  if (count !== 0) {
-    return (
-      <div className="new-expense">
-        <ExpenseForm
-          onSubmitCheck={fieldEntryHandler}
-          onSaveExpenseData={saveExpenseDataHandler}
-        />
-      </div>
-    );
-  }
+  const stopEditingHandler = () => {
+    setIsEditing(false);
+  };
 
   return (
     <div className="new-expense">
-      <button onClick={fieldEntryHandler}>Add Expenses</button>
+      {!isEditing && (
+        <button onClick={startEditingHandler}>Add Expenses</button>
+      )}
+      {isEditing && (
+        <ExpenseForm
+          onCancel={stopEditingHandler}
+          onSaveExpenseData={saveExpenseDataHandler}
+        />
+      )}
     </div>
   );
 };
